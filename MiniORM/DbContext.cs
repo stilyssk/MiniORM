@@ -194,7 +194,7 @@ namespace MiniORM
 		
 		private string GetTableName(Type tableType)
 		{
-			var tableName = ((TableAttribute)Activator.CreateInstance(tableType, typeof(TableAttribute))).Name;
+			var tableName = ((TableAttribute)Attribute.GetCustomAttribute(tableType,typeof(TableAttribute)))?.Name;// ((TableAttribute)tableType.GetTypeInfo).Name;
 			if (tableName == null)
 			{
 				tableName = this.dbSetProperties[tableType].Name;
